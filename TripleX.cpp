@@ -1,17 +1,14 @@
 #include <iostream>
 
-void PrintIntroduction()
+void PrintIntroduction(int Difficulty)
 {
-    // Print welcome messages to the terminal
-    std::cout << "You are a secret agent breaking into a secure server room...";
-    std::cout << std::endl;
-    std::cout << "Enter the correct code to continue" << std::endl;
+    std::cout << "\n\nYou are a secret agent breaking into a level " << Difficulty;
+    std::cout << " secure server room...\nEnter the correct code to continue...\n\n";
 }
 
-void PlayGame()
+bool PlayGame(int Difficulty)
 {
-
-    PrintIntroduction();
+    PrintIntroduction(Difficulty);
 
     // Declare 3 number code
     const int CodeA = 4;
@@ -39,16 +36,30 @@ void PlayGame()
     if (GuessSum == CodeSum && GuessProduct == CodeProduct)
     {
         std::cout << "You win!";
+        return true;
     }
     else
     {
         std::cout << "You lose!";
+        return false;
     }
 }
 
 int main()
 {
-    PlayGame();
+    int LevelDifficulty = 1;
+    while(true)
+    {
+        bool bLevelComplete = PlayGame(LevelDifficulty);
+        std::cin.clear(); // Clear any errors
+        std::cin.ignore(); // Discards the buffer
 
+        if (bLevelComplete)  
+        {
+            ++LevelDifficulty;
+        }
+
+    }
+    
     return 0;
 }
